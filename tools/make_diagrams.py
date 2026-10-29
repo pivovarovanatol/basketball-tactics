@@ -134,6 +134,7 @@ def card(title, subtitle, drawing, lines, legend):
 
 LEGEND = "Сплошная — рывок · пунктир — пас · «Т» — заслон · цифры — порядок"
 LEGEND_DEF = "O — атака, X — защита · сплошная — рывок · оранжевый — защита"
+LEGEND_SCR = "Сплошная — рывок · «Т» — заслон на защитника X · цифры — порядок"
 
 
 # ---------- the plays ----------
@@ -179,42 +180,44 @@ def upper_scissors():
 
 
 def lower_cross():
-    d = screen("line", [(143, 262), (228, 262)])
-    d += arrow("quad", [(258, 248), (195, 210), (142, 242)], CUT)
-    d += screen("line", [(196, 124), (225, 242)])
-    d += arrow("quad", [(232, 250), (300, 232), (318, 172)], CUT)
+    d = screen("line", [(142, 268), (231, 278)])
+    d += arrow("quad", [(258, 246), (195, 210), (142, 242)], CUT)
+    d += screen("line", [(194, 124), (222, 184)])
+    d += arrow("quad", [(240, 256), (240, 180), (318, 168)], CUT)
     d += player(65, 150, "O1", ball=True) + player(190, 110, "O2")
-    d += player(128, 262, "O3") + player(264, 262, "O5")
-    d += step(170, 276, 1) + step(168, 222, 2) + step(198, 176, 3) + step(304, 250, 4)
+    d += player(128, 266, "O3") + player(266, 258, "O5")
+    d += player(248, 280, "X5", side=DEF) + player(226, 200, "X3", side=DEF)
+    d += step(160, 288, 1) + step(172, 212, 2) + step(196, 170, 3) + step(290, 210, 4)
     lines = [
         "**Заслон поперёк, а потом заслон самому заслонщику.",
-        "1. O3 ставит заслон поперёк зоны для O5.",
+        "1. O3 ставит заслон поперёк зоны на X5, защитника O5.",
         "2. O5 выходит на ближний к мячу блок — пас в низкую стойку.",
-        "3. Сразу за этим O2 ставит pin-down самому O3.",
+        "3. Сразу за этим O2 ставит pin-down на X3.",
         "4. O3 выходит наверх на крыло под бросок.",
         "Защита занята центровым и не успевает за вторым заслоном.",
         "O1 выбирает: пас O5 в стойку или переводом на O3.",
     ]
-    return card("Нижний крест", "screen the screener", d, lines, LEGEND)
+    return card("Нижний крест", "screen the screener", d, lines, LEGEND_SCR)
 
 
 def upper_cross():
-    d = screen("line", [(146, 183), (230, 183)])
-    d += arrow("quad", [(247, 197), (190, 232), (140, 200)], CUT)
-    d += arrow("line", [(236, 170), (290, 118)], CUT)
+    d = screen("line", [(146, 184), (219, 180)])
+    d += arrow("quad", [(247, 200), (190, 232), (140, 204)], CUT)
+    d += arrow("line", [(212, 166), (204, 116)], CUT)
     d += player(65, 150, "O1", ball=True)
-    d += player(132, 183, "O4") + player(250, 183, "O3")
-    d += step(188, 170, 1) + step(190, 232, 2) + step(272, 152, 3)
+    d += player(132, 183, "O4") + player(256, 188, "O3")
+    d += player(234, 168, "X3", side=DEF)
+    d += step(182, 170, 1) + step(190, 236, 2) + step(226, 128, 3)
     lines = [
         "**Та же идея на уровне линии штрафного (элбоу).",
-        "1. O4 ставит заслон поперёк для O3.",
+        "1. O4 ставит заслон поперёк на X3, защитника O3.",
         "2. O3 выходит на ближний к мячу элбоу, получает пас",
         "    лицом к кольцу: бросок, проход или передача.",
         "3. O4 после заслона выходит наверх под бросок.",
         "Если защитник O4 помог на O3 — открыт O4 наверху.",
         "Часто используется как вход в позиционную атаку.",
     ]
-    return card("Верхний крест", "elbow cross screen", d, lines, LEGEND)
+    return card("Верхний крест", "elbow cross screen", d, lines, LEGEND_SCR)
 
 
 def pin_down_defense():
@@ -244,7 +247,7 @@ DEF_FADED = dict(fill="#FDF7F4", stroke="#E6BFAF", text="#C69A88")
 
 
 def elbow_pnr_setup():
-    d = screen("quad", [(258, 248), (264, 190), (252, 147)])
+    d = screen("quad", [(256, 248), (226, 140), (257, 135)])
     d += arrow("line", [(232, 258), (230, 210)], DEF_MOVE, dashed=True, width=1.3)
     d += player(288, 112, "O1", ball=True) + player(274, 130, "X1", side=DEF)
     d += player(258, 262, "O5") + player(232, 272, "X5", side=DEF)
@@ -252,7 +255,7 @@ def elbow_pnr_setup():
     d += player(80, 140, "O3") + player(110, 172, "X3", side=DEF)
     d += player(35, 282, "O4") + player(122, 256, "X4", side=DEF)
     d += step(278, 200, 1)
-    d += note(238, 151, "заслон", color=CUT, anchor="end")
+    d += note(244, 124, "заслон", color=CUT, anchor="end")
     lines = [
         "**Атака: четверо снаружи, углы заняты.",
         "O1 — с мячом в правом слоте, над элбоу.",
@@ -349,7 +352,7 @@ def elbow_pnr_vs_hedge():
 
 
 def side_screen_setup():
-    d = screen("quad", [(150, 242), (168, 196), (136, 148)])
+    d = screen("quad", [(150, 242), (118, 176), (139, 136)])
     d += arrow("line", [(146, 96), (172, 91)], CUT, width=1.3)
     d += arrow("quad", [(116, 110), (78, 180), (120, 238)], CUT, width=2)
     d += player(130, 100, "O1", ball=True) + player(148, 122, "X1", side=DEF)
@@ -358,7 +361,7 @@ def side_screen_setup():
     d += player(345, 282, "O4") + player(312, 264, "X4", side=DEF)
     d += player(148, 256, "O5") + player(168, 282, "X5", side=DEF)
     d += note(176, 78, "финт", color=CUT)
-    d += step(182, 206, 1) + step(196, 104, 2) + step(72, 214, 3)
+    d += step(154, 204, 1) + step(196, 104, 2) + step(72, 214, 3)
     lines = [
         "**O1 и O2 сверху, O5 на блоке со стороны мяча,",
         "**O3 на 45° и O4 в углу — на слабой стороне.",
