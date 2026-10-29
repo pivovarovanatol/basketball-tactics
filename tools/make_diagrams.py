@@ -134,7 +134,8 @@ def card(title, subtitle, drawing, lines, legend):
 
 LEGEND = "Сплошная — рывок · пунктир — пас · «Т» — заслон · цифры — порядок"
 LEGEND_DEF = "O — атака, X — защита · сплошная — рывок · оранжевый — защита"
-LEGEND_SCR = "Сплошная — рывок · «Т» — заслон на защитника X · цифры — порядок"
+LEGEND_SCR = "O — атака, X — защита · сплошная — рывок · «Т» — заслон · цифры — порядок"
+LEGEND_FULL = "O — атака, X — защита · сплошная — рывок · пунктир — пас · цифры — порядок"
 
 
 # ---------- the plays ----------
@@ -144,11 +145,14 @@ def lower_scissors():
     d += arrow("quad", [(288, 132), (200, 160), (165, 262)], CUT)
     d += arrow("quad", [(92, 132), (180, 160), (215, 262)], CUT)
     d += player(190, 70, "O1", ball=True) + player(190, 178, "O5")
-    d += player(300, 125, "O3") + player(80, 125, "O4")
+    d += player(300, 125, "O3") + player(80, 125, "O4") + player(345, 282, "O2")
+    d += player(168, 94, "X1", side=DEF) + player(190, 252, "X5", side=DEF)
+    d += player(296, 152, "X3", side=DEF) + player(84, 152, "X4", side=DEF)
+    d += player(320, 268, "X2", side=DEF)
     d += step(178, 124, 1) + step(256, 166, 2) + step(124, 166, 3)
     lines = [
         "**Расстановка: O1 наверху с мячом, O5 на линии штрафного,",
-        "**O3 и O4 высоко на крыльях, углы пустые.",
+        "**O3 и O4 высоко на крыльях, O2 в дальнем углу.",
         "1. O1 отдаёт пас на O5.",
         "2. O3 режет по диагонали мимо O5 к кольцу, впритирку.",
         "3. O4 режет следом, за спиной O3. Пути скрещиваются",
@@ -156,7 +160,7 @@ def lower_scissors():
         "Чтение O5: чаще всего пас в зону на ход под лэй-ап.",
         "Если защита провалилась в зону — O5 бросает или идёт сам.",
     ]
-    return card("Нижний скрест", "split cuts / scissors (low)", d, lines, LEGEND)
+    return card("Нижний скрест", "split cuts / scissors (low)", d, lines, LEGEND_FULL)
 
 
 def upper_scissors():
@@ -164,8 +168,11 @@ def upper_scissors():
     d += arrow("cubic", [(288, 132), (220, 145), (160, 150), (150, 255)], CUT)
     d += arrow("cubic", [(92, 132), (160, 145), (220, 150), (230, 255)], CUT)
     d += player(190, 70, "O1", ball=True) + player(190, 190, "O5")
-    d += player(300, 125, "O3") + player(80, 125, "O4")
-    d += step(178, 112, 1) + step(242, 126, 2) + step(138, 126, 3)
+    d += player(300, 125, "O3") + player(80, 125, "O4") + player(345, 282, "O2")
+    d += player(168, 94, "X1", side=DEF) + player(190, 220, "X5", side=DEF)
+    d += player(296, 152, "X3", side=DEF) + player(84, 152, "X4", side=DEF)
+    d += player(320, 268, "X2", side=DEF)
+    d += step(204, 118, 1) + step(242, 126, 2) + step(138, 126, 3)
     lines = [
         "**Та же расстановка, но рывки скрещиваются над O5 —",
         "**между ним и мячом — и уходят в зону по бокам от него.",
@@ -176,7 +183,7 @@ def upper_scissors():
         "защитник перекрыл сверху — пас на ход в зону;",
         "защитники поменялись — мяч тому, у кого мисматч.",
     ]
-    return card("Верхний скрест", "split cuts / scissors (high)", d, lines, LEGEND)
+    return card("Верхний скрест", "split cuts / scissors (high)", d, lines, LEGEND_FULL)
 
 
 def lower_cross():
@@ -185,8 +192,10 @@ def lower_cross():
     d += screen("line", [(194, 124), (222, 184)])
     d += arrow("quad", [(240, 256), (240, 180), (318, 168)], CUT)
     d += player(65, 150, "O1", ball=True) + player(190, 110, "O2")
-    d += player(128, 266, "O3") + player(266, 258, "O5")
+    d += player(128, 266, "O3") + player(266, 258, "O5") + player(345, 282, "O4")
     d += player(248, 280, "X5", side=DEF) + player(226, 200, "X3", side=DEF)
+    d += player(86, 168, "X1", side=DEF) + player(172, 130, "X2", side=DEF)
+    d += player(318, 268, "X4", side=DEF)
     d += step(160, 288, 1) + step(172, 212, 2) + step(196, 170, 3) + step(290, 210, 4)
     lines = [
         "**Заслон поперёк, а потом заслон самому заслонщику.",
@@ -206,7 +215,10 @@ def upper_cross():
     d += arrow("line", [(212, 166), (204, 116)], CUT)
     d += player(65, 150, "O1", ball=True)
     d += player(132, 183, "O4") + player(256, 188, "O3")
-    d += player(234, 168, "X3", side=DEF)
+    d += player(322, 168, "O2") + player(118, 262, "O5")
+    d += player(234, 168, "X3", side=DEF) + player(86, 168, "X1", side=DEF)
+    d += player(112, 204, "X4", side=DEF) + player(300, 184, "X2", side=DEF)
+    d += player(142, 276, "X5", side=DEF)
     d += step(182, 170, 1) + step(190, 236, 2) + step(226, 128, 3)
     lines = [
         "**Та же идея на уровне линии штрафного (элбоу).",
