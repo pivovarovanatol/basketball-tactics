@@ -417,6 +417,152 @@ def side_screen_reset():
     return card("Ресет на другую сторону", "защита при своих", d, lines, LEGEND)
 
 
+LEGEND_ZONE = "Сплошная — рывок · пунктир — пас · оранжевый — защита · цифры — порядок"
+
+
+def zone_131_high_post():
+    d = arrow("line", [(202, 114), (306, 176)], PASS, dashed=True)
+    d += arrow("line", [(238, 170), (270, 168)], DEF_MOVE, dashed=True, width=1.3)
+    d += arrow("line", [(306, 188), (220, 196)], PASS, dashed=True)
+    d += arrow("line", [(190, 250), (196, 216)], DEF_MOVE, dashed=True, width=1.3)
+    d += arrow("line", [(194, 208), (92, 270)], PASS, dashed=True)
+    d += player(190, 100, "O1", ball=True) + player(320, 184, "O2") + player(62, 160, "O3")
+    d += player(205, 198, "O5") + player(80, 278, "O4")
+    d += player(155, 172, "X1", side=DEF) + player(225, 172, "X2", side=DEF)
+    d += player(150, 262, "X3", side=DEF) + player(190, 262, "X5", side=DEF)
+    d += player(272, 250, "X4", side=DEF)
+    d += step(262, 132, 1) + step(262, 206, 2) + step(126, 232, 3)
+    lines = [
+        "**Нечётная расстановка 1-3-1 против чётной 2-3.",
+        "O1 наверху между двумя верхними, O5 на штрафной,",
+        "O2 и O3 на крыльях, O4 у лицевой под кольцом.",
+        "1. O1 отдаёт на крыло O2, X2 выходит на него.",
+        "2. O2 сразу на O5 в середину — это дыра зоны.",
+        "3. X5 вышел на O5 — пас под кольцо на O4.",
+        "Не вышел — O5 бросает со штрафной или идёт сам.",
+        "Помог X3 — перевод на O3 на дальнее крыло.",
+    ]
+    return card("1-3-1 через высокий пост", "против зоны 2-3", d, lines, LEGEND_ZONE)
+
+
+def zone_high_low():
+    d = arrow("line", [(178, 113), (188, 180)], PASS, dashed=True)
+    d += arrow("line", [(242, 266), (218, 270)], CUT)
+    d += arrow("quad", [(178, 204), (160, 242), (200, 264)], PASS, dashed=True)
+    d += player(176, 100, "O1", ball=True) + player(320, 184, "O2") + player(62, 170, "O3")
+    d += player(190, 196, "O5") + player(254, 266, "O4")
+    d += player(155, 172, "X1", side=DEF) + player(225, 172, "X2", side=DEF)
+    d += player(110, 250, "X3", side=DEF) + player(192, 224, "X5", side=DEF)
+    d += player(292, 240, "X4", side=DEF)
+    d += step(196, 140, 1) + step(222, 238, 2) + step(146, 252, 3)
+    lines = [
+        "**Двое высоких в связке: верх — низ.",
+        "O5 на штрафной, O4 на блоке, остальные снаружи.",
+        "1. O1 отдаёт в щель между верхними на O5.",
+        "2. Средний нижний X5 выходит на O5...",
+        "3. ...O4 закрывает его спиной и уходит под кольцо,",
+        "    O5 отдаёт навесом за спину X5.",
+        "X5 не вышел — O5 бросает со штрафной.",
+        "Помог X3 — отдача на дальнее крыло O3.",
+    ]
+    return card("Хай-лоу", "против зоны 2-3", d, lines, LEGEND_ZONE)
+
+
+def zone_baseline_runner():
+    d = arrow("line", [(306, 176), (204, 112)], PASS, dashed=True)
+    d += arrow("line", [(176, 112), (76, 164)], PASS, dashed=True)
+    d += arrow("quad", [(330, 300), (190, 316), (52, 296)], CUT, width=2)
+    d += arrow("line", [(60, 186), (48, 272)], PASS, dashed=True)
+    d += player(190, 100, "O1") + player(318, 184, "O2", ball=True) + player(62, 172, "O4")
+    d += player(345, 284, "O3") + player(160, 208, "O5")
+    d += player(200, 165, "X1", side=DEF) + player(300, 210, "X2", side=DEF)
+    d += player(165, 262, "X3", side=DEF) + player(232, 262, "X5", side=DEF)
+    d += player(298, 262, "X4", side=DEF)
+    d += step(262, 132, 1) + step(120, 128, 2) + step(260, 296, 3) + step(40, 226, 4)
+    lines = [
+        "**Зона сдвигается за мячом — бьём туда, где пусто.",
+        "Мяч справа, зона сдвинулась вправо, O3 — в правом углу.",
+        "1–2. Быстрый перевод мяча: O2 → O1 → O4.",
+        "3. Тем временем O3 бежит по лицевой под зоной",
+        "    из правого угла в левый.",
+        "4. O4 отдаёт в угол — открытый бросок с угла.",
+        "X3 вышел в угол — открыт O4 на крыле или O5.",
+        "Можно и сразу скип-пасом через всю площадку.",
+    ]
+    return card("Бегун по лицевой", "против зоны 2-3", d, lines, LEGEND_ZONE)
+
+
+def zone32_gaps():
+    d = arrow("line", [(150, 125), (153, 160)], CUT, width=2)
+    d += arrow("line", [(160, 172), (180, 194)], PASS, dashed=True)
+    d += arrow("quad", [(332, 290), (280, 300), (232, 288)], CUT)
+    d += arrow("line", [(194, 218), (222, 280)], PASS, dashed=True)
+    d += player(148, 112, "O1", ball=True) + player(232, 112, "O2")
+    d += player(190, 204, "O5") + player(40, 282, "O3") + player(345, 282, "O4")
+    d += player(190, 148, "X1", side=DEF) + player(110, 172, "X2", side=DEF)
+    d += player(270, 172, "X3", side=DEF) + player(150, 252, "X4", side=DEF)
+    d += player(224, 214, "X5", side=DEF)
+    d += note(250, 236, "X5 вышел", color=DEF_MOVE, anchor="start")
+    d += step(130, 142, 1) + step(156, 192, 2) + step(292, 278, 3) + step(196, 256, 4)
+    lines = [
+        "**Двое сверху — в щели между тремя верхними.",
+        "O1 и O2 сверху, O5 на штрафной, O3 и O4 в углах.",
+        "1. O1 проходит в щель между X2 и X1 — оба на него.",
+        "2. Пас на O5 в середину: внизу трое против двух.",
+        "3. X5 вышел на O5 — O4 из угла режет по лицевой.",
+        "4. O5 отдаёт O4 под кольцо.",
+        "X1 и X2 не сжались — O1 бросает или идёт до конца.",
+        "X3 помог на O5 — открыт O2 сверху.",
+    ]
+    return card("Двое сверху в щели", "против зоны 3-2", d, lines, LEGEND_ZONE)
+
+
+def zone32_corner_post():
+    d = arrow("line", [(324, 196), (342, 266)], PASS, dashed=True)
+    d += arrow("line", [(332, 272), (272, 240)], PASS, dashed=True)
+    d += arrow("line", [(54, 288), (148, 288)], CUT)
+    d += arrow("line", [(250, 244), (162, 282)], PASS, dashed=True)
+    d += player(148, 112, "O1") + player(320, 182, "O2", ball=True)
+    d += player(258, 232, "O5") + player(40, 282, "O3") + player(345, 282, "O4")
+    d += player(190, 148, "X1", side=DEF) + player(110, 172, "X2", side=DEF)
+    d += player(270, 172, "X3", side=DEF) + player(230, 280, "X4", side=DEF)
+    d += player(314, 290, "X5", side=DEF)
+    d += step(344, 226, 1) + step(300, 236, 2) + step(100, 300, 3) + step(206, 284, 4)
+    lines = [
+        "**Через угол — в пост. Внизу всего двое защитников.",
+        "1. Мяч на крыле у O2 — отдаёт в угол на O4.",
+        "Нижний X5 вынужден выйти в угол, X4 смещается к O5.",
+        "2. O4 отдаёт O5 в пост.",
+        "3. Левая сторона пустая — O3 уходит из угла под кольцо,",
+        "4. O5 отдаёт ему — лэй-ап с другой стороны.",
+        "Никто не сместился — O5 играет один в один у кольца.",
+    ]
+    return card("Через угол в пост", "против зоны 3-2", d, lines, LEGEND_ZONE)
+
+
+def zone32_skip():
+    d = arrow("line", [(78, 182), (330, 274)], PASS, dashed=True, width=2)
+    d += arrow("line", [(188, 210), (250, 260)], CUT)
+    d += arrow("line", [(334, 274), (264, 264)], PASS, dashed=True)
+    d += player(62, 176, "O1", ball=True) + player(232, 112, "O2")
+    d += player(180, 196, "O5") + player(40, 282, "O3") + player(345, 282, "O4")
+    d += player(94, 196, "X2", side=DEF) + player(160, 158, "X1", side=DEF)
+    d += player(240, 168, "X3", side=DEF) + player(108, 260, "X4", side=DEF)
+    d += player(322, 250, "X5", side=DEF)
+    d += step(120, 214, 1) + step(238, 224, 2) + step(300, 284, 3)
+    lines = [
+        "**Скип-пас: зона съехала — дальний угол пустой.",
+        "Мяч на левом крыле, вся зона сдвинулась влево.",
+        "1. O1 через всю площадку в правый угол на O4.",
+        "    X5 не успевает — бросок с угла.",
+        "2. X5 летит в угол — O5 ныряет на правый блок.",
+        "3. O4 отдаёт O5 под кольцо.",
+        "Лучше всего после двух-трёх быстрых передач:",
+        "    зона устаёт сдвигаться.",
+    ]
+    return card("Скип-пас в дальний угол", "против зоны 3-2", d, lines, LEGEND_ZONE)
+
+
 PLAYS = [
     ("01-lower-scissors", lower_scissors),
     ("02-upper-scissors", upper_scissors),
@@ -430,6 +576,12 @@ PLAYS = [
     ("10-side-screen-setup", side_screen_setup),
     ("11-side-screen-switch", side_screen_switch),
     ("12-side-screen-reset", side_screen_reset),
+    ("13-zone-131-high-post", zone_131_high_post),
+    ("14-zone-high-low", zone_high_low),
+    ("15-zone-baseline-runner", zone_baseline_runner),
+    ("16-zone32-gaps", zone32_gaps),
+    ("17-zone32-corner-post", zone32_corner_post),
+    ("18-zone32-skip", zone32_skip),
 ]
 
 
@@ -448,6 +600,8 @@ def main():
     sheet(cards, names[5:7], "Пик-н-ролл на элбоу", "elbow-pnr")
     sheet(cards, names[7:9], "Пик-н-ролл: смена и хедж", "elbow-pnr-switch-hedge")
     sheet(cards, names[9:12], "Заслон для ведущего сверху", "side-screen")
+    sheet(cards, names[12:15], "Против зоны 2-3 (трое снизу)", "zone-2-3")
+    sheet(cards, names[15:18], "Против зоны 3-2 (трое сверху)", "zone-3-2")
 
 
 def sheet(cards, names, title, filename):
