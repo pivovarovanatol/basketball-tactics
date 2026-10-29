@@ -348,6 +348,71 @@ def elbow_pnr_vs_hedge():
     return card("Пик-н-ролл против хеджа", "hedge / show", d, lines, LEGEND_MIX)
 
 
+def side_screen_setup():
+    d = screen("quad", [(150, 242), (168, 196), (136, 148)])
+    d += arrow("line", [(146, 96), (172, 91)], CUT, width=1.3)
+    d += arrow("quad", [(116, 110), (78, 180), (120, 238)], CUT, width=2)
+    d += player(130, 100, "O1", ball=True) + player(148, 122, "X1", side=DEF)
+    d += player(250, 100, "O2") + player(232, 124, "X2", side=DEF)
+    d += player(322, 160, "O3") + player(296, 184, "X3", side=DEF)
+    d += player(345, 282, "O4") + player(312, 264, "X4", side=DEF)
+    d += player(148, 256, "O5") + player(168, 282, "X5", side=DEF)
+    d += note(176, 78, "финт", color=CUT)
+    d += step(182, 206, 1) + step(196, 104, 2) + step(72, 214, 3)
+    lines = [
+        "**O1 и O2 сверху, O5 на блоке со стороны мяча,",
+        "**O3 на 45° и O4 в углу — на слабой стороне.",
+        "1. По сигналу O5 выходит и ставит заслон на X1",
+        "    (сзади — бэкскрин, или сбоку).",
+        "2. O1 делает финт в одну сторону...",
+        "3. ...и резко уходит в другую, через заслон.",
+        "X1 застрял на заслоне — проход в зону и лэй-ап:",
+        "    сторона пустая, помочь некому.",
+    ]
+    return card("Заслон для ведущего", "расстановка и проход", d, lines, LEGEND_DEF)
+
+
+def side_screen_switch():
+    d = arrow("quad", [(148, 152), (180, 200), (184, 256)], CUT, width=2)
+    d += arrow("quad", [(96, 164), (110, 240), (172, 246)], PASS, dashed=True)
+    d += player(100, 150, "O1", ball=True) + player(120, 182, "X5", side=DEF)
+    d += player(138, 140, "O5") + player(150, 116, "X1", side=DEF)
+    d += player(250, 100, "O2") + player(232, 124, "X2", side=DEF)
+    d += player(322, 160, "O3") + player(296, 184, "X3", side=DEF)
+    d += player(345, 282, "O4") + player(312, 264, "X4", side=DEF)
+    d += note(82, 210, "смена", color=DEF_MOVE)
+    d += step(198, 200, 1) + step(96, 246, 2)
+    lines = [
+        "**Смена: X5 переходит на O1, маленький X1 — на O5.",
+        "1. O5 сразу проваливается в зону, закрывая X1 спиной.",
+        "2. Пас O5 под кольцо — большой против маленького.",
+        "Или O1 сам атакует медленного X5 по пустой стороне.",
+        "Кто-то со слабой стороны помог на O5 — отдача",
+        "    открытому: O4 в угол или O3 на крыло.",
+    ]
+    return card("Если смена", "мисматч в зоне", d, lines, LEGEND)
+
+
+def side_screen_reset():
+    d = arrow("line", [(146, 98), (232, 98)], PASS, dashed=True)
+    d += arrow("quad", [(148, 156), (210, 170), (258, 236)], CUT)
+    d += arrow("quad", [(308, 166), (190, 214), (76, 168)], CUT)
+    d += arrow("quad", [(332, 280), (190, 238), (50, 278)], CUT)
+    d += player(130, 100, "O1") + player(250, 100, "O2", ball=True)
+    d += player(134, 148, "O5") + player(322, 160, "O3") + player(345, 282, "O4")
+    d += step(190, 84, 1) + step(276, 226, 2) + step(300, 196, 3) + step(316, 252, 4)
+    lines = [
+        "**Защитники остались при своих — ресет.",
+        "1. O1 отдаёт O2, теперь ведущий — O2 справа сверху.",
+        "2. O5 переходит на правый блок.",
+        "3. O3 и 4. O4 перебегают на левую сторону —",
+        "    теперь она слабая. O1 остаётся сверху слева.",
+        "Дальше то же самое с другой стороны:",
+        "    O5 по сигналу выходит на заслон для O2.",
+    ]
+    return card("Ресет на другую сторону", "защита при своих", d, lines, LEGEND)
+
+
 PLAYS = [
     ("01-lower-scissors", lower_scissors),
     ("02-upper-scissors", upper_scissors),
@@ -358,6 +423,9 @@ PLAYS = [
     ("07-elbow-pnr-options", elbow_pnr_options),
     ("08-elbow-pnr-vs-switch", elbow_pnr_vs_switch),
     ("09-elbow-pnr-vs-hedge", elbow_pnr_vs_hedge),
+    ("10-side-screen-setup", side_screen_setup),
+    ("11-side-screen-switch", side_screen_switch),
+    ("12-side-screen-reset", side_screen_reset),
 ]
 
 
@@ -375,6 +443,7 @@ def main():
     sheet(cards, names[:4], "Кресты и скресты", "all-four-plays")
     sheet(cards, names[5:7], "Пик-н-ролл на элбоу", "elbow-pnr")
     sheet(cards, names[7:9], "Пик-н-ролл: смена и хедж", "elbow-pnr-switch-hedge")
+    sheet(cards, names[9:12], "Заслон для ведущего сверху", "side-screen")
 
 
 def sheet(cards, names, title, filename):
