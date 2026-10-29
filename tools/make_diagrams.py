@@ -221,14 +221,14 @@ def upper_cross():
 
 
 def pin_down_defense():
-    d = arrow("quad", [(335, 278), (330, 200), (244, 192)], CUT)
-    d += arrow("line", [(282, 254), (212, 284)], CUT)
-    d += arrow("line", [(286, 224), (270, 190)], DEF_MOVE, dashed=True, width=1.3)
-    d += arrow("quad", [(326, 258), (300, 214), (232, 210)], DEF_MOVE, dashed=True, width=1.3)
+    d = screen("line", [(330, 169), (310, 246)])
+    d += arrow("quad", [(342, 276), (345, 200), (244, 206)], CUT)
+    d += arrow("line", [(298, 252), (214, 282)], CUT)
+    d += arrow("line", [(288, 188), (264, 197)], DEF_MOVE, dashed=True, width=1.3)
     d += player(65, 150, "O1", ball=True)
-    d += player(292, 242, "O3") + player(340, 290, "O2")
-    d += player(262, 176, "X3", side=DEF) + player(218, 208, "X2", side=DEF)
-    d += note(244, 300, "O3 открыт", color="#A32D2D")
+    d += player(334, 156, "O3") + player(340, 290, "O2")
+    d += player(300, 182, "X3", side=DEF) + player(312, 264, "X2", side=DEF)
+    d += note(250, 302, "O3 открыт", color="#A32D2D")
     lines = [
         "**Ошибка: оба защитника уходят за выходящим из угла.",
         "O3 ставит pin-down для O2. Без смены роли такие:",
@@ -240,7 +240,8 @@ def pin_down_defense():
         "Лечится: X3 заранее кричит «заслон!», роли чёткие,",
         "а при одинаковом росте — просто смена (switch).",
     ]
-    return card("Pin-down на слабой стороне", "защита", d, lines, LEGEND_DEF)
+    return card("Pin-down на слабой стороне", "защита", d, lines,
+                "O — атака, X — защита · «Т» — заслон · оранжевый — защита")
 
 
 DEF_FADED = dict(fill="#FDF7F4", stroke="#E6BFAF", text="#C69A88")
