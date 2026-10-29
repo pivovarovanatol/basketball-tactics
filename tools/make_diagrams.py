@@ -240,12 +240,68 @@ def pin_down_defense():
     return card("Pin-down на слабой стороне", "защита", d, lines, LEGEND_DEF)
 
 
+DEF_FADED = dict(fill="#FDF7F4", stroke="#E6BFAF", text="#C69A88")
+
+
+def elbow_pnr_setup():
+    d = screen("quad", [(258, 248), (264, 190), (252, 147)])
+    d += arrow("line", [(232, 258), (230, 210)], DEF_MOVE, dashed=True, width=1.3)
+    d += player(288, 112, "O1", ball=True) + player(274, 130, "X1", side=DEF)
+    d += player(258, 262, "O5") + player(232, 272, "X5", side=DEF)
+    d += player(345, 282, "O2") + player(318, 266, "X2", side=DEF)
+    d += player(80, 140, "O3") + player(110, 172, "X3", side=DEF)
+    d += player(35, 282, "O4") + player(122, 256, "X4", side=DEF)
+    d += step(278, 200, 1)
+    d += note(238, 151, "заслон", color=CUT, anchor="end")
+    lines = [
+        "**Атака: четверо снаружи, углы заняты.",
+        "O1 — с мячом в правом слоте, над элбоу.",
+        "1. O5 выходит с блока и ставит заслон на X1 у элбоу.",
+        "O2 — правый угол, O3 — левое крыло, O4 — левый угол.",
+        "**Защита:",
+        "X1 — на O1, проходит над заслоном или под ним.",
+        "X5 — опускается в «дроп» к линии штрафного.",
+        "X4 — «нижний»: страхует проход и ролл к кольцу.",
+        "X2 и X3 — на шаг в помощь, но готовы к переводу.",
+    ]
+    return card("Пик-н-ролл: расстановка", "на элбоу", d, lines, LEGEND_DEF)
+
+
+def elbow_pnr_options():
+    d = arrow("quad", [(276, 106), (225, 104), (205, 162)], CUT, width=2)
+    d += arrow("quad", [(256, 154), (262, 220), (212, 266)], CUT)
+    d += arrow("line", [(262, 150), (306, 178)], CUT)
+    d += arrow("line", [(198, 172), (50, 274)], PASS, dashed=True)
+    d += arrow("line", [(196, 160), (96, 143)], PASS, dashed=True)
+    d += player(279, 137, "X1", side=DEF_FADED) + player(228, 200, "X5", side=DEF_FADED)
+    d += player(318, 266, "X2", side=DEF_FADED) + player(110, 174, "X3", side=DEF_FADED)
+    d += player(125, 252, "X4", side=DEF_FADED)
+    d += player(288, 112, "O1", ball=True) + player(250, 140, "O5")
+    d += player(345, 282, "O2") + player(80, 140, "O3") + player(35, 282, "O4")
+    d += step(228, 94, 1) + step(270, 230, 2) + step(150, 226, 3)
+    d += step(146, 140, 4) + step(314, 160, 5)
+    lines = [
+        "**После заслона O1 читает защиту:",
+        "1. Проход в середину — бросок с отрыва или к кольцу.",
+        "2. O5 ныряет к кольцу (ролл) — пас на ролл или лоб.",
+        "3. X4 помог на ролл — перевод в левый угол на O4.",
+        "4. X3 провалился в помощь — пас на O3 под бросок.",
+        "5. X5 в дропе — O5 выходит на бросок (поп), не ныряет.",
+        "Если X2 помог на проход — пас в правый угол на O2.",
+        "Если X1 закрыл середину (айс) — O1 уходит от заслона",
+        "    вдоль лицевой (реджект), O5 ныряет к кольцу.",
+    ]
+    return card("Пик-н-ролл: опции", "защита бледным", d, lines, LEGEND)
+
+
 PLAYS = [
     ("01-lower-scissors", lower_scissors),
     ("02-upper-scissors", upper_scissors),
     ("03-lower-cross", lower_cross),
     ("04-upper-cross", upper_cross),
     ("05-pin-down-defense", pin_down_defense),
+    ("06-elbow-pnr-setup", elbow_pnr_setup),
+    ("07-elbow-pnr-options", elbow_pnr_options),
 ]
 
 
@@ -259,27 +315,33 @@ def main():
             f.write(svg)
         cairosvg.svg2png(bytestring=svg.encode(), write_to=os.path.join(OUT, f"{name}.png"))
 
-    # One shareable sheet with the four attack plays (2 x 2).
-    names = [n for n, _ in PLAYS[:4]]
+    names = [n for n, _ in PLAYS]
+    sheet(cards, names[:4], "Кресты и скресты", "all-four-plays")
+    sheet(cards, names[5:7], "Пик-н-ролл на элбоу", "elbow-pnr")
+
+
+def sheet(cards, names, title, filename):
+    """Combine several cards into one shareable image, two per row."""
     cell_h = max(cards[n][1] for n in names)
+    rows = (len(names) + 1) // 2
     head = 110
-    w, h = CARD_W * 2 + 20, head + cell_h * 2 + 20
+    w, h = CARD_W * 2 + 20, head + cell_h * rows + 20
     parts = [f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}">',
              f'<rect width="{w}" height="{h}" fill="#F1EFE8"/>',
              f'<text x="{w / 2}" y="70" text-anchor="middle" font-family="{FONT}" font-size="40" '
-             f'font-weight="bold" fill="#2C2C2A">Кресты и скресты</text>']
+             f'font-weight="bold" fill="#2C2C2A">{title}</text>']
     for i, n in enumerate(names):
-        x = 10 + (i % 2) * (CARD_W + 0)
+        x = 10 + (i % 2) * CARD_W
         y = head + (i // 2) * cell_h
         inner = "\n".join(cards[n][0].split("\n")[2:-1])
         parts.append(f'<g transform="translate({x} {y})">'
                      f'<rect x="5" y="5" width="{CARD_W - 10}" height="{cell_h - 10}" rx="14" fill="#FFFFFF"/>'
                      f'{inner}</g>')
     parts.append("</svg>")
-    sheet = "\n".join(parts)
-    with open(os.path.join(OUT, "all-four-plays.svg"), "w", encoding="utf-8") as f:
-        f.write(sheet)
-    cairosvg.svg2png(bytestring=sheet.encode(), write_to=os.path.join(OUT, "all-four-plays.png"))
+    svg = "\n".join(parts)
+    with open(os.path.join(OUT, f"{filename}.svg"), "w", encoding="utf-8") as f:
+        f.write(svg)
+    cairosvg.svg2png(bytestring=svg.encode(), write_to=os.path.join(OUT, f"{filename}.png"))
 
 
 if __name__ == "__main__":
