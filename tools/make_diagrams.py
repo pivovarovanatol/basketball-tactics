@@ -294,6 +294,60 @@ def elbow_pnr_options():
     return card("Пик-н-ролл: опции", "защита бледным", d, lines, LEGEND)
 
 
+LEGEND_MIX = "Сплошная — рывок · пунктир — пас · оранжевый — защита · цифры — опции"
+
+
+def elbow_pnr_vs_switch():
+    d = arrow("quad", [(306, 122), (330, 195), (272, 250)], CUT, width=2)
+    d += arrow("quad", [(238, 163), (222, 210), (200, 250)], CUT)
+    d += arrow("line", [(190, 258), (50, 278)], PASS, dashed=True)
+    d += player(300, 112, "O1", ball=True) + player(280, 132, "X5", side=DEF)
+    d += player(244, 150, "O5") + player(252, 124, "X1", side=DEF)
+    d += player(345, 282, "O2") + player(318, 266, "X2", side=DEF)
+    d += player(80, 140, "O3") + player(110, 174, "X3", side=DEF)
+    d += player(35, 282, "O4") + player(120, 236, "X4", side=DEF)
+    d += note(236, 112, "смена", color=DEF_MOVE, anchor="end")
+    d += step(334, 170, 1) + step(206, 206, 2) + step(120, 286, 3)
+    lines = [
+        "**Защита меняется: X5 на O1, X1 на O5.",
+        "**Получаются два мисматча — их и атакуем.",
+        "1. O1 проходит против медленного X5 к кольцу.",
+        "2. O5 закрывает маленького X1 спиной, ловит у кольца.",
+        "3. X4 помог на O5 — отдача в левый угол на O4.",
+        "X2 помог на проход — пас в правый угол на O2.",
+        "Если защита меняется заранее — O5 не доводит заслон",
+        "    и сразу ныряет к кольцу (слип).",
+    ]
+    return card("Пик-н-ролл против смены", "switch", d, lines, LEGEND_MIX)
+
+
+def elbow_pnr_vs_hedge():
+    d = arrow("quad", [(250, 104), (204, 132), (214, 196)], DEF_MOVE, dashed=True, width=1.3)
+    d += arrow("line", [(133, 244), (176, 256)], DEF_MOVE, dashed=True, width=1.3)
+    d += arrow("quad", [(256, 154), (262, 220), (212, 266)], CUT, width=2)
+    d += arrow("line", [(200, 274), (50, 280)], PASS, dashed=True)
+    d += arrow("line", [(316, 92), (338, 68)], CUT)
+    d += player(296, 108, "O1", ball=True) + player(262, 94, "X5", side=DEF)
+    d += player(250, 140, "O5") + player(276, 146, "X1", side=DEF)
+    d += player(345, 282, "O2") + player(318, 266, "X2", side=DEF)
+    d += player(80, 140, "O3") + player(110, 174, "X3", side=DEF)
+    d += player(35, 282, "O4") + player(120, 240, "X4", side=DEF)
+    d += note(262, 74, "хедж", color=DEF_MOVE)
+    d += step(272, 226, 1) + step(120, 294, 2) + step(342, 94, 3)
+    lines = [
+        "**Хедж: X5 выпрыгивает наверх и выдавливает O1,",
+        "**потом бежит назад к O5. На миг O5 без защитника.",
+        "1. O5 сразу ныряет к кольцу — пас на ролл над хеджем.",
+        "2. X4 помог на ролл — O5 отдаёт в левый угол на O4.",
+        "3. O1 не лезет в хедж: отводит мяч назад, тянет X5",
+        "    за собой и даёт O5 время уйти вниз.",
+        "Шорт-ролл: O5 ловит у штрафной, 4 на 3 — бросок,",
+        "    флоатер или передача в угол.",
+        "Щель между X1 и X5 — O1 проходит между ними (сплит).",
+    ]
+    return card("Пик-н-ролл против хеджа", "hedge / show", d, lines, LEGEND_MIX)
+
+
 PLAYS = [
     ("01-lower-scissors", lower_scissors),
     ("02-upper-scissors", upper_scissors),
@@ -302,6 +356,8 @@ PLAYS = [
     ("05-pin-down-defense", pin_down_defense),
     ("06-elbow-pnr-setup", elbow_pnr_setup),
     ("07-elbow-pnr-options", elbow_pnr_options),
+    ("08-elbow-pnr-vs-switch", elbow_pnr_vs_switch),
+    ("09-elbow-pnr-vs-hedge", elbow_pnr_vs_hedge),
 ]
 
 
@@ -318,6 +374,7 @@ def main():
     names = [n for n, _ in PLAYS]
     sheet(cards, names[:4], "Кресты и скресты", "all-four-plays")
     sheet(cards, names[5:7], "Пик-н-ролл на элбоу", "elbow-pnr")
+    sheet(cards, names[7:9], "Пик-н-ролл: смена и хедж", "elbow-pnr-switch-hedge")
 
 
 def sheet(cards, names, title, filename):
