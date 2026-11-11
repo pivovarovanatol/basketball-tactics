@@ -1,0 +1,147 @@
+{
+  "folders": [
+    "Атака против зоны",
+    "Атака против зоны/Зона 2-3",
+    "Атака против зоны/Зона 3-2",
+    "Атака против личной",
+    "Атака против личной/Заслон для ведущего",
+    "Атака против личной/Кресты и скресты",
+    "Атака против личной/Пик-н-ролл на элбоу",
+    "Защита"
+  ],
+  "plays": [
+    {
+      "id": "01-lower-scissors",
+      "name": "Нижний скрест",
+      "folder": "Атака против личной/Кресты и скресты",
+      "file": "01-lower-scissors.json",
+      "updated": "2026-11-10T00:00:00.000Z"
+    },
+    {
+      "id": "02-upper-scissors",
+      "name": "Верхний скрест",
+      "folder": "Атака против личной/Кресты и скресты",
+      "file": "02-upper-scissors.json",
+      "updated": "2026-11-10T00:00:00.000Z"
+    },
+    {
+      "id": "03-lower-cross",
+      "name": "Нижний крест",
+      "folder": "Атака против личной/Кресты и скресты",
+      "file": "03-lower-cross.json",
+      "updated": "2026-11-10T00:00:00.000Z"
+    },
+    {
+      "id": "04-upper-cross",
+      "name": "Верхний крест",
+      "folder": "Атака против личной/Кресты и скресты",
+      "file": "04-upper-cross.json",
+      "updated": "2026-11-10T00:00:00.000Z"
+    },
+    {
+      "id": "06-elbow-pnr-setup",
+      "name": "Пик-н-ролл: расстановка",
+      "folder": "Атака против личной/Пик-н-ролл на элбоу",
+      "file": "06-elbow-pnr-setup.json",
+      "updated": "2026-11-10T00:00:00.000Z"
+    },
+    {
+      "id": "07-elbow-pnr-options",
+      "name": "Пик-н-ролл: опции",
+      "folder": "Атака против личной/Пик-н-ролл на элбоу",
+      "file": "07-elbow-pnr-options.json",
+      "updated": "2026-11-10T00:00:00.000Z"
+    },
+    {
+      "id": "08-elbow-pnr-vs-switch",
+      "name": "Пик-н-ролл против смены",
+      "folder": "Атака против личной/Пик-н-ролл на элбоу",
+      "file": "08-elbow-pnr-vs-switch.json",
+      "updated": "2026-11-10T00:00:00.000Z"
+    },
+    {
+      "id": "09-elbow-pnr-vs-hedge",
+      "name": "Пик-н-ролл против хеджа",
+      "folder": "Атака против личной/Пик-н-ролл на элбоу",
+      "file": "09-elbow-pnr-vs-hedge.json",
+      "updated": "2026-11-10T00:00:00.000Z"
+    },
+    {
+      "id": "10-side-screen-setup",
+      "name": "Заслон для ведущего: проход",
+      "folder": "Атака против личной/Заслон для ведущего",
+      "file": "10-side-screen-setup.json",
+      "updated": "2026-11-10T00:00:00.000Z"
+    },
+    {
+      "id": "11-side-screen-switch",
+      "name": "Заслон для ведущего: если смена",
+      "folder": "Атака против личной/Заслон для ведущего",
+      "file": "11-side-screen-switch.json",
+      "updated": "2026-11-10T00:00:00.000Z"
+    },
+    {
+      "id": "12-side-screen-reset",
+      "name": "Заслон для ведущего: ресет",
+      "folder": "Атака против личной/Заслон для ведущего",
+      "file": "12-side-screen-reset.json",
+      "updated": "2026-11-10T00:00:00.000Z"
+    },
+    {
+      "id": "13-zone-131-high-post",
+      "name": "1-3-1 через высокий пост",
+      "folder": "Атака против зоны/Зона 2-3",
+      "file": "13-zone-131-high-post.json",
+      "updated": "2026-11-10T00:00:00.000Z"
+    },
+    {
+      "id": "14-zone-high-low",
+      "name": "Хай-лоу",
+      "folder": "Атака против зоны/Зона 2-3",
+      "file": "14-zone-high-low.json",
+      "updated": "2026-11-10T00:00:00.000Z"
+    },
+    {
+      "id": "15-zone-baseline-runner",
+      "name": "Бегун по лицевой",
+      "folder": "Атака против зоны/Зона 2-3",
+      "file": "15-zone-baseline-runner.json",
+      "updated": "2026-11-10T00:00:00.000Z"
+    },
+    {
+      "id": "16-zone32-gaps",
+      "name": "Двое сверху в щели",
+      "folder": "Атака против зоны/Зона 3-2",
+      "file": "16-zone32-gaps.json",
+      "updated": "2026-11-10T00:00:00.000Z"
+    },
+    {
+      "id": "17-zone32-corner-post",
+      "name": "Через угол в пост",
+      "folder": "Атака против зоны/Зона 3-2",
+      "file": "17-zone32-corner-post.json",
+      "updated": "2026-11-10T00:00:00.000Z"
+    },
+    {
+      "id": "18-zone32-skip",
+      "name": "Скип-пас в дальний угол",
+      "folder": "Атака против зоны/Зона 3-2",
+      "file": "18-zone32-skip.json",
+      "updated": "2026-11-10T00:00:00.000Z"
+    },
+    {
+      "id": "05-pin-down-mistake",
+      "name": "Pin-down: ошибка",
+      "folder": "Защита",
+      "file": "05-pin-down-mistake.json",
+      "updated": "2026-11-10T00:00:00.000Z"
+    },
+    {
+      "id": "05-pin-down-right",
+      "name": "Pin-down: как правильно",
+      "folder": "Защита",
+      "file": "05-pin-down-right.json",
+      "updated": "2026-11-10T00:00:00.000Z"
+    }
+  ]
+}

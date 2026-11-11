@@ -2,6 +2,16 @@
 
 Схемы комбинаций с описаниями. Каждую картинку можно открыть и переслать как есть.
 
+## ▶ Анимированная доска
+
+**[pivovarovanatol.github.io/basketball-tactics](https://pivovarovanatol.github.io/basketball-tactics/)** — все схемы ниже
+как анимации: смотреть по шагам, вперёд-назад, в замедлении и **в 3D**, глазами любого игрока. У каждой комбинации своя
+ссылка (🔗), её можно отправить игрокам.
+
+В режиме тренера можно записывать новые комбинации прямо на доске (рывки, ведение, заслоны, пасы, навесы, броски),
+раскладывать их по папкам и публиковать в этот репозиторий. Для публикации нужен токен GitHub с правом записи
+(⚙ в режиме тренера). Формат файлов — [docs/PLAY_FORMAT.md](docs/PLAY_FORMAT.md).
+
 ## Содержание
 
 ### ⚔️ Атака
@@ -111,6 +121,12 @@
 **Примеры:** [Screen Away 3v3 — lock and trail, show and recover](https://playbank.fastmodelsports.com/library/basketball/fastdraw/276735/play-Screen-Away-3v3) · [Breakthrough: «bump» против снайпера на down screen](https://www.breakthroughbasketball.com/defense/advanced-tactic-great-shooters) · [HoopTactics: упражнение на защиту от down screen (PDF)](https://hooptactics.net/premium/coach/pdf/drills/drilldefshelldownscreens.pdf)
 
 ---
+
+## Как устроена доска
+
+- `index.html`, `css/`, `js/` — сайт (GitHub Pages, без сборки). 3D — Three.js, модели и анимации — Quaternius (CC0), см. [assets/CREDITS.md](assets/CREDITS.md).
+- `plays/` — комбинации в JSON и `index.json` со списком и папками. Сайт и редактор читают и пишут сюда.
+- `tools/make_plays.py` — генерирует комбинации из схем (перезаписывает `plays/`).
 
 ## Как перерисовать
 
